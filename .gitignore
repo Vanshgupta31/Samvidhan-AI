@@ -12,6 +12,12 @@ backend/chroma_db/
 # Environment variables (IMPORTANT: Contains API keys)
 backend/.env
 .env
+backend/.api_key
+.api_key
+
+# Virtual Environment
+.venv/
+venv/
 
 # Node.js
 frontend/node_modules/

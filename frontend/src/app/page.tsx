@@ -56,9 +56,15 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/query', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiKey = process.env.NEXT_PUBLIC_MCP_API_KEY;
+
+      const response = await fetch(`${apiUrl}/query`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(apiKey && { 'X-API-Key': apiKey })
+        },
         body: JSON.stringify({ query: text, language: 'hi' }),
       });
 
@@ -142,8 +148,8 @@ export default function Home() {
                         {/* Confidence Badge */}
                         <div className="flex items-center gap-3 mb-2">
                           <span className={`text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider shadow-sm border ${(msg.content as QueryResponse).confidence === 'High' ? 'bg-green-500/20 text-green-200 border-green-500/30' :
-                              (msg.content as QueryResponse).confidence === 'Medium' ? 'bg-yellow-500/20 text-yellow-200 border-yellow-500/30' :
-                                'bg-red-500/20 text-red-200 border-red-500/30'
+                            (msg.content as QueryResponse).confidence === 'Medium' ? 'bg-yellow-500/20 text-yellow-200 border-yellow-500/30' :
+                              'bg-red-500/20 text-red-200 border-red-500/30'
                             }`}>
                             {(msg.content as QueryResponse).confidence} Confidence
                           </span>
