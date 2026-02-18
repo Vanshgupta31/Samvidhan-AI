@@ -27,7 +27,9 @@ def load_or_generate_api_key() -> str:
         f.write(key)
     return key
 
-API_KEY = os.getenv("MCP_API_KEY", load_or_generate_api_key())
+API_KEY = os.getenv("MCP_API_KEY")
+if not API_KEY:
+    API_KEY = load_or_generate_api_key()
 
 # ─── MCP Server ───────────────────────────────────────────────────────────────
 
