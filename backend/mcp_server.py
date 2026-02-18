@@ -37,12 +37,14 @@ mcp = FastMCP("Samvidhan AI")
 
 # ─── RAG Engine ───────────────────────────────────────────────────────────────
 
+rag_engine = None
 try:
+    print("Initialising RAGEngine...")
     rag_engine = RAGEngine()
-    print("RAGEngine initialized successfully for MCP server.")
+    print("RAGEngine initialized successfully.")
 except Exception as e:
-    print(f"Failed to initialize RAGEngine: {e}")
-    rag_engine = None
+    print(f"CRITICAL ERROR: Failed to initialize RAGEngine: {e}")
+    # We continue so the server starts, but /health will show it's not ready
 
 # ─── Helper ───────────────────────────────────────────────────────────────────
 
@@ -134,6 +136,7 @@ def root():
     return {
         "service": "Samvidhan AI",
         "status": "running",
+        "rag_engine": "ready" if rag_engine else "failed",
         "docs": "/docs",
     }
 
