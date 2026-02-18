@@ -184,9 +184,9 @@ if __name__ == "__main__":
     print("  Samvidhan AI MCP + API Server")
     print("="*50)
     print(f"\n  API Key : {API_KEY}")
-    print(f"  Setup   : http://localhost:8000/setup")
-    print(f"  Docs    : http://localhost:8000/docs")
-    print(f"  Query   : POST http://localhost:8000/query")
+    print(f"  Setup   : http://localhost:8001/setup")
+    print(f"  Docs    : http://localhost:8001/docs")
+    print(f"  Query   : POST http://localhost:8001/query")
     print("="*50 + "\n")
 
-    uvicorn.run(api, host="0.0.0.0", port=8000)
+    uvicorn.run(api, host="0.0.0.0", port=8001)
